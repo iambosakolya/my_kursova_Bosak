@@ -1,0 +1,10 @@
+
+Contract ID: dd
+Departure station: dddd
+Arrival station: dd
+Insurance sum: dd
+Cargo type: dd
+Delivery time: dd
+Weight: dd
+Date of conclusion: dd
+Cost: dd
