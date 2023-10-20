@@ -1,10 +1,10 @@
 
-Contract ID: dd
-Departure station: dddd
-Arrival station: dd
-Insurance sum: dd
-Cargo type: dd
-Delivery time: dd
-Weight: dd
-Date of conclusion: dd
-Cost: dd
+Contract ID: 12
+Departure station: st1
+Arrival station: st2
+Insurance sum: 666
+Cargo type: type
+Delivery time: 5 days
+Weight: 45 kg
+Date of conclusion: 21.10.2023
+Cost: 500

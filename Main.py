@@ -23,81 +23,6 @@ def center_window(window):
 # for choosing registration
 registration_type = StringVar()
 
-def client_reg_window():
-    client_reg_window = tk.Toplevel(root)
-    client_reg_window.title("Client registration")
-    client_reg_window.resizable(width=False, height=False)
-    client_reg_window.geometry("400x300")
-    center_window(client_reg_window)
-
-    firm_name_label = tk.Label(client_reg_window, text="Firm name:")
-    firm_name_label.pack()
-    firm_name_label.place(x=10, y=10)
-
-    firm_name_entry = tk.Entry(client_reg_window)
-    firm_name_entry.pack()
-    firm_name_entry.place(x=150, y=10)
-
-    address_label = tk.Label(client_reg_window, text="Address:")
-    address_label.pack()
-    address_label.place(x=10, y=40)
-
-    address_entry = tk.Entry(client_reg_window)
-    address_entry.pack()
-    address_entry.place(x=150, y=40)
-
-    phone_number_label = tk.Label(client_reg_window, text="Phone number:")
-    phone_number_label.pack()
-    phone_number_label.place(x=10, y=70)
-
-    phone_number_entry = tk.Entry(client_reg_window)
-    phone_number_entry.pack()
-    phone_number_entry.place(x=150, y=70)
-
-    pib_label = tk.Label(client_reg_window, text="PIB:")
-    pib_label.pack()
-    pib_label.place(x=10, y=100)
-
-    pib_entry = tk.Entry(client_reg_window)
-    pib_entry.pack()
-    pib_entry.place(x=150, y=100)
-
-    def save_client_registration():
-        firm_name = firm_name_entry.get()
-        address = address_entry.get()
-        phone_number = phone_number_entry.get()
-        pib = pib_entry.get()
-
-        try:
-            client = Client(firm_name, address, phone_number, pib)
-
-            with open("clients.txt", "a") as file:
-                file.write("Firm Name: {}\n".format(firm_name))
-                file.write("Address: {}\n".format(address))
-                file.write("Phone Number: {}\n".format(phone_number))
-                file.write("PIB: {}\n".format(pib))
-                file.write("\n")
-
-            messagebox.showinfo("Success", "Client successfully сreated.")
-        except Exception as e:
-            messagebox.showerror("Error", f"An error occurred: {str(e)}")
-
-    sv_btn = tk.Button(client_reg_window, text="Write to file", command=save_client_registration)
-    sv_btn.pack()
-    sv_btn.place(relx=0.5, rely=0.8, anchor='s')
-
-    register_button = tk.Button(client_reg_window, text="Register", command=client_window)
-    register_button.pack()
-    register_button.place(relx=0.5, rely=1.0, anchor='s')
-
-    def view_firms():
-        with open("clients.txt", "r") as file:
-            clients = file.read()
-            contract_text.insert(INSERT, clients)
-
-def register_client():
-    client_reg_window()
-
 def client_window():
     def create_contract():
         contract_window = Toplevel(client_window)
@@ -211,10 +136,95 @@ def client_window():
             file.write(f"Date of conclusion: {contract.date}\n")
             file.write(f"Cost: {contract.cost}\n")
 
+        with open("addresses.txt", "a") as contract_id_arrival_file:
+            contract_id_arrival_file.write(f"\nContract ID: {contract.contract_id}\n"
+                                           f"Arrival Station: {contract.arr_st}")
+
     def view_contract():
         with open("contract.txt", "r") as file:
             contracts = file.read()
             contract_text.insert(INSERT, contracts)
+
+    def view_address():
+        with open("addresses.txt", "r") as file:
+            addresses = file.read()
+            contract_text.delete(1.0, END)
+            contract_text.insert(INSERT, addresses)
+
+    def clear_text_field():
+        contract_text.delete(1.0, END)
+
+    def client_reg_window():
+        client_reg_window = tk.Toplevel(root)
+        client_reg_window.title("Client registration")
+        client_reg_window.resizable(width=False, height=False)
+        client_reg_window.geometry("400x300")
+        center_window(client_reg_window)
+
+
+        firm_name_label = tk.Label(client_reg_window, text="Firm name:")
+        firm_name_label.pack()
+        firm_name_label.place(x=10, y=10)
+
+        firm_name_entry = tk.Entry(client_reg_window)
+        firm_name_entry.pack()
+        firm_name_entry.place(x=150, y=10)
+
+        address_label = tk.Label(client_reg_window, text="Address:")
+        address_label.pack()
+        address_label.place(x=10, y=40)
+
+        address_entry = tk.Entry(client_reg_window)
+        address_entry.pack()
+        address_entry.place(x=150, y=40)
+
+        phone_number_label = tk.Label(client_reg_window, text="Phone number:")
+        phone_number_label.pack()
+        phone_number_label.place(x=10, y=70)
+
+        phone_number_entry = tk.Entry(client_reg_window)
+        phone_number_entry.pack()
+        phone_number_entry.place(x=150, y=70)
+
+        pib_label = tk.Label(client_reg_window, text="PIB:")
+        pib_label.pack()
+        pib_label.place(x=10, y=100)
+
+        pib_entry = tk.Entry(client_reg_window)
+        pib_entry.pack()
+        pib_entry.place(x=150, y=100)
+
+        def save_client_registration():
+            firm_name = firm_name_entry.get()
+            address = address_entry.get()
+            phone_number = phone_number_entry.get()
+            pib = pib_entry.get()
+
+            try:
+                client = Client(firm_name, address, phone_number, pib)
+                with open("client_firm.txt", "a") as file:
+                    file.write("Firm Name: {}\n".format(firm_name))
+                    file.write("Address: {}\n".format(address))
+                    file.write("Phone Number: {}\n".format(phone_number))
+                    file.write("PIB: {}\n".format(pib))
+                    file.write("\n")
+
+                messagebox.showinfo("Success", "Client successfully сreated.")
+            except Exception as e:
+                messagebox.showerror("Error", f"An error occurred: {str(e)}")
+
+        sv_btn = tk.Button(client_reg_window, text="Write to file", command=save_client_registration)
+        sv_btn.pack()
+        sv_btn.place(relx=0.5, rely=0.8, anchor='s')
+
+        register_button = tk.Button(client_reg_window, text="Register", command=client_window)
+        register_button.pack()
+        register_button.place(relx=0.5, rely=1.0, anchor='s')
+
+    def view_firms():
+        with open("client_firm.txt", "r") as file:
+            clients = file.read()
+            contract_text.insert(INSERT, clients)
 
     client_window = Toplevel(root)
     client_window.title("Client registration")
@@ -225,20 +235,27 @@ def client_window():
     client_label.pack()
     client_label.place(x=220, y=20)
 
+    clear_text_button = Button(client_window, text="Clear the field", command=clear_text_field)
+    new_client_btn = Button(client_window, text="Create new client", command=client_reg_window)
     new_contract_btn = Button(client_window, text="New сontract", command=create_contract)
     view_contract_btn = Button(client_window, text="View the list of сontracts", command=view_contract)
-    view_address_btn = Button(client_window, text="View the list of delivery addresses")
-    view_firms_btn = Button(client_window, text="View the list of client`s firms")
+    view_address_btn = Button(client_window, text="View the list of delivery addresses",command=view_address)
+    view_firms_btn = Button(client_window, text="View the list of client`s firms",command=view_firms)
 
+    clear_text_button.pack()
+    new_client_btn.pack()
     new_contract_btn.pack()
     view_contract_btn.pack()
     view_address_btn.pack()
     view_firms_btn.pack()
 
-    new_contract_btn.place(x=70, y=100)
-    view_contract_btn.place(x=70, y=150)
-    view_address_btn.place(x=70, y=200)
-    view_firms_btn.place(x=70, y=250)
+    clear_text_button.place(x=300, y=50)
+    new_client_btn.place(x=70, y=160)
+    new_contract_btn.place(x=70, y=200)
+    view_contract_btn.place(x=70, y=240)
+    view_address_btn.place(x=70, y=280)
+    view_firms_btn.place(x=70, y=320)
+
 
     contract_text = Text(client_window, height=30, width=50, wrap=WORD)
     contract_text.pack()
@@ -255,6 +272,9 @@ def dispatcher_window():
     dispatcher_label = tk.Label(dispatcher_window, text="You are currently signed as a dispatcher:", font=("Cooper Black", 12))
     dispatcher_label.pack()
     dispatcher_label.place(x=200, y=20)
+
+def register_client():
+    client_window()
 
 def register_dispatcher():
     dispatcher_window()

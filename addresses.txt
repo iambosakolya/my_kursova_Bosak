@@ -1,0 +1,3 @@
+
+Contract ID: 12
+Arrival Station: st2
