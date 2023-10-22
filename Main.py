@@ -23,8 +23,6 @@ def center_window(window):
     y = (window.winfo_screenheight() // 2) - (height // 2)
     window.geometry('{}x{}+{}+{}'.format(width, height, x, y))
 
-data_text = None
-
 def user_window(user_type):
     user_window = Toplevel(root)
     user_window.title(f"{user_type}")
@@ -35,6 +33,24 @@ def user_window(user_type):
     data_text = Text(user_window, wrap=tk.WORD, height=30, width=50)
     data_text.pack()
     data_text.place(x=300, y=100)
+
+    def view_contract():
+        with open("contract.txt", "r") as file:
+            contracts = file.read()
+            data_text.delete(1.0, tk.END)
+            data_text.insert(tk.INSERT, contracts)
+
+    def view_address():
+        with open("addresses.txt", "r") as file:
+            addresses = file.read()
+            data_text.delete(1.0, tk.END)
+            data_text.insert(tk.INSERT, addresses)
+
+    def view_firms():
+        with open("client_firm.txt", "r") as file:
+            clients = file.read()
+            data_text.delete(1.0, tk.END)
+            data_text.insert(tk.INSERT, clients)
 
     if user_type == "Client":
         client_label = tk.Label(user_window, text="You are currently signed as a client:", font=("Cooper Black", 12))
@@ -77,7 +93,7 @@ def user_window(user_type):
         view_address_btn.pack()
         view_firms_btn.pack()
 
-        new_dispatcher.place(x=70, y=160)
+        new_dispatcher_btn.place(x=70, y=160)
         new_contract_btn.place(x=70, y=200)
         view_contract_btn.place(x=70, y=240)
         view_address_btn.place(x=70, y=280)
@@ -198,25 +214,6 @@ def save_contract_to_file(contract):
     with open("addresses.txt", "a") as arrivalSt_file:
         arrivalSt_file.write(f"\nContract ID: {contract.contract_id}\n"
                                        f"Arrival Station: {contract.arr_st}")
-
-def view_contract():
-    with open("contract.txt", "r") as file:
-        contracts = file.read()
-        data_text.delete(1.0, tk.END)  #
-        data_text.insert(tk.INSERT, contracts)
-
-def view_address():
-    with open("addresses.txt", "r") as file:
-        addresses = file.read()
-        data_text.delete(1.0, tk.END)
-        data_text.insert(tk.INSERT, addresses)
-
-def view_firms():
-    with open("client_firm.txt", "r") as file:
-        clients = file.read()
-        data_text.delete(1.0, tk.END)
-        data_text.insert(tk.INSERT, clients)
-
 
 def client_reg_window():
     client_reg_window = tk.Toplevel(root)
