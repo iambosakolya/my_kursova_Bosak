@@ -1,0 +1,29 @@
+Contract ID: 12
+Departure station: ee
+Arrival station: ee
+Insurance sum: 66
+Cargo type: yy
+Delivery time: 60
+Weight: 6
+Date of conclusion: 6
+Cost: 6
+
+Contract ID: 11
+Departure station: e
+Arrival station: e
+Insurance sum: 333
+Cargo type: r
+Delivery time: 4
+Weight: 444
+Date of conclusion: 5653
+Cost: 33
+
+Contract ID: 1
+Departure station: ee
+Arrival station: ee
+Insurance sum: 5
+Cargo type: 5
+Delivery time: 5555
+Weight: 5
+Date of conclusion: 5
+Cost: 5

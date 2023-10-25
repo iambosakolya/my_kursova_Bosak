@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import *
@@ -35,29 +36,47 @@ def user_window(user_type):
     data_text.place(x=300, y=100)
 
     def view_contract():
-        with open("contract.txt", "r") as file:
+        with open("files/contract.txt", "r") as file:
             contracts = file.read()
             data_text.delete(1.0, tk.END)
             data_text.insert(tk.INSERT, contracts)
 
     def view_address():
-        with open("addresses.txt", "r") as file:
+        with open("files/addresses.txt", "r") as file:
             addresses = file.read()
             data_text.delete(1.0, tk.END)
             data_text.insert(tk.INSERT, addresses)
 
     def view_firms():
-        with open("client_firm.txt", "r") as file:
+        with open("files/client_firm.txt", "r") as file:
             clients = file.read()
             data_text.delete(1.0, tk.END)
             data_text.insert(tk.INSERT, clients)
+
+    def max_time():
+        with open("files/max_delivery_time.txt", "r") as file:
+            contracts = file.read()
+            data_text.delete(1.0, tk.END)
+            data_text.insert(tk.INSERT, contracts)
+
+    def arrival_st():
+        with open("files/pop_arrSt.txt", "r") as file:
+            contracts = file.read()
+            data_text.delete(1.0, tk.END)
+            data_text.insert(tk.INSERT, contracts)
+
+    def avg_time():
+        with open("files/avg_time.txt", "r") as file:
+            contracts = file.read()
+            data_text.delete(1.0, tk.END)
+            data_text.insert(tk.INSERT, contracts)
 
     if user_type == "Client":
         client_label = tk.Label(user_window, text="You are currently signed as a client:", font=("Cooper Black", 12))
         client_label.pack()
         client_label.place(x=200, y=20)
 
-        new_client_btn = Button(user_window, text="Create new client", command=client_reg_window)
+        new_client_btn = Button(user_window, text="Create new client", command=client_reg)
         new_contract_btn = Button(user_window, text="New contract", command=create_contract)
         view_contract_btn = Button(user_window, text="View the list of contracts", command=view_contract)
         view_address_btn = Button(user_window, text="View the list of delivery addresses", command=view_address)
@@ -75,17 +94,25 @@ def user_window(user_type):
         view_address_btn.place(x=70, y=280)
         view_firms_btn.place(x=70, y=320)
 
+
     elif user_type == "Dispatcher":
         dispatcher_label = tk.Label(user_window, text="You are currently signed as a dispatcher:",
                                     font=("Cooper Black", 12))
         dispatcher_label.pack()
         dispatcher_label.place(x=200, y=20)
 
-        new_dispatcher_btn = Button(user_window, text="Create new dispatcher")
+        new_dispatcher_btn = Button(user_window, text="Create new dispatcher", command=dispatcher_reg)
         new_contract_btn = Button(user_window, text="New contract", command=create_contract)
         view_contract_btn = Button(user_window, text="View the list of contracts", command=view_contract)
         view_address_btn = Button(user_window, text="View the list of delivery addresses", command=view_address)
         view_firms_btn = Button(user_window, text="View the list of client's firms", command=view_firms)
+
+        max_btn = Button(user_window, text="Calculate max delivery time", command=max_delivery_time)
+        view_max_btn = Button(user_window, text="View", command=max_time)
+        arr_btn = Button(user_window, text="Find the most popular station", command=most_popular_destination)
+        view_arr_btn = Button(user_window, text="View", command=arrival_st)
+        avg_btn = Button(user_window, text="Calculate avg delivery time", command=calculate_avg_time)
+        view_avg_btn = Button(user_window, text="View", command=avg_time)
 
         new_dispatcher_btn.pack()
         new_contract_btn.pack()
@@ -93,11 +120,25 @@ def user_window(user_type):
         view_address_btn.pack()
         view_firms_btn.pack()
 
+        max_btn.pack()
+        view_max_btn.pack()
+        arr_btn.pack()
+        view_arr_btn.pack()
+        avg_btn.pack()
+        view_avg_btn.pack()
+
         new_dispatcher_btn.place(x=70, y=160)
         new_contract_btn.place(x=70, y=200)
         view_contract_btn.place(x=70, y=240)
         view_address_btn.place(x=70, y=280)
         view_firms_btn.place(x=70, y=320)
+
+        max_btn.place(x=10, y=360)
+        view_max_btn.place(x=200, y=360)
+        arr_btn.place(x=10, y=400)
+        view_arr_btn.place(x=200, y=400)
+        avg_btn.place(x=10, y=440)
+        view_avg_btn.place(x=200, y=440)
 
 
 def create_contract():
@@ -200,7 +241,7 @@ def create_contract():
     create_contract_btn.place(x=150, y=270)
 
 def save_contract_to_file(contract):
-    with open("contract.txt", "a") as file:
+    with open("files/contract.txt", "a") as file:
         file.write(f"\nContract ID: {contract.contract_id}\n")
         file.write(f"Departure station: {contract.dep_st}\n")
         file.write(f"Arrival station: {contract.arr_st}\n")
@@ -211,50 +252,50 @@ def save_contract_to_file(contract):
         file.write(f"Date of conclusion: {contract.date}\n")
         file.write(f"Cost: {contract.cost}\n")
 
-    with open("addresses.txt", "a") as arrivalSt_file:
+    with open("files/addresses.txt", "a") as arrivalSt_file:
         arrivalSt_file.write(f"\nContract ID: {contract.contract_id}\n"
                                        f"Arrival Station: {contract.arr_st}")
 
-def client_reg_window():
-    client_reg_window = tk.Toplevel(root)
-    client_reg_window.title("Client registration")
-    client_reg_window.resizable(width=False, height=False)
-    client_reg_window.geometry("400x300")
-    center_window(client_reg_window)
+def client_reg():
+    client_reg = tk.Toplevel(root)
+    client_reg.title("Client registration")
+    client_reg.resizable(width=False, height=False)
+    client_reg.geometry("400x300")
+    center_window(client_reg)
 
-    firm_name_label = tk.Label(client_reg_window, text="Firm name:")
+    firm_name_label = tk.Label(client_reg, text="Firm name:")
     firm_name_label.pack()
     firm_name_label.place(x=10, y=10)
 
-    firm_name_entry = tk.Entry(client_reg_window)
+    firm_name_entry = tk.Entry(client_reg)
     firm_name_entry.pack()
     firm_name_entry.place(x=150, y=10)
 
-    address_label = tk.Label(client_reg_window, text="Address:")
+    address_label = tk.Label(client_reg, text="Address:")
     address_label.pack()
     address_label.place(x=10, y=40)
 
-    address_entry = tk.Entry(client_reg_window)
+    address_entry = tk.Entry(client_reg)
     address_entry.pack()
     address_entry.place(x=150, y=40)
 
-    phone_number_label = tk.Label(client_reg_window, text="Phone number:")
+    phone_number_label = tk.Label(client_reg, text="Phone number:")
     phone_number_label.pack()
     phone_number_label.place(x=10, y=70)
 
-    phone_number_entry = tk.Entry(client_reg_window)
+    phone_number_entry = tk.Entry(client_reg)
     phone_number_entry.pack()
     phone_number_entry.place(x=150, y=70)
 
-    pib_label = tk.Label(client_reg_window, text="PIB:")
+    pib_label = tk.Label(client_reg, text="PIB:")
     pib_label.pack()
     pib_label.place(x=10, y=100)
 
-    pib_entry = tk.Entry(client_reg_window)
+    pib_entry = tk.Entry(client_reg)
     pib_entry.pack()
     pib_entry.place(x=150, y=100)
 
-    def save_client_registration():
+    def save_client_reg():
         firm_name = firm_name_entry.get()
         address = address_entry.get()
         phone_number = phone_number_entry.get()
@@ -262,7 +303,7 @@ def client_reg_window():
 
         try:
             client = Client(firm_name, address, phone_number, pib)
-            with open("client_firm.txt", "a") as file:
+            with open("files/client_firm.txt", "a") as file:
                 file.write("Firm Name: {}\n".format(firm_name))
                 file.write("Address: {}\n".format(address))
                 file.write("Phone Number: {}\n".format(phone_number))
@@ -273,9 +314,186 @@ def client_reg_window():
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred: {str(e)}")
 
-    sv_btn = tk.Button(client_reg_window, text="Write to file", command=save_client_registration)
+    sv_btn = tk.Button(client_reg, text="Write to file", command=save_client_reg)
     sv_btn.pack()
     sv_btn.place(relx=0.5, rely=0.8, anchor='s')
+
+def dispatcher_reg():
+    dispatcher_reg = tk.Toplevel(root)
+    dispatcher_reg.title("Dispatcher registration")
+    dispatcher_reg.resizable(width=False, height=False)
+    dispatcher_reg.geometry("400x300")
+    center_window(dispatcher_reg)
+
+    firm_name_l = tk.Label(dispatcher_reg, text="Firm name:")
+    firm_name_l.pack()
+    firm_name_l.place(x=10, y=10)
+
+    firm_name_e = tk.Entry(dispatcher_reg)
+    firm_name_e.pack()
+    firm_name_e.place(x=150, y=10)
+
+    address_l = tk.Label(dispatcher_reg, text="Address:")
+    address_l.pack()
+    address_l.place(x=10, y=40)
+
+    address_e = tk.Entry(dispatcher_reg)
+    address_e.pack()
+    address_e.place(x=150, y=40)
+
+    phone_number_l = tk.Label(dispatcher_reg, text="Phone number:")
+    phone_number_l.pack()
+    phone_number_l.place(x=10, y=70)
+
+    phone_number_e = tk.Entry(dispatcher_reg)
+    phone_number_e.pack()
+    phone_number_e.place(x=150, y=70)
+
+    pib_l = tk.Label(dispatcher_reg, text="PIB:")
+    pib_l.pack()
+    pib_l.place(x=10, y=100)
+
+    pib_e = tk.Entry(dispatcher_reg)
+    pib_e.pack()
+    pib_e.place(x=150, y=100)
+
+    exp_l = tk.Label(dispatcher_reg, text="Work experience:")
+    exp_l.pack()
+    exp_l.place(x=10, y=130)
+
+    exp_e = tk.Entry(dispatcher_reg)
+    exp_e.pack()
+    exp_e.place(x=150, y=130)
+
+    def save_dis_reg():
+        firm_name = firm_name_e.get()
+        address = address_e.get()
+        phone_number = phone_number_e.get()
+        pib = pib_e.get()
+        experience = exp_e.get()
+
+        try:
+            dispatcher = Dispatcher(firm_name, address, phone_number, pib, experience)
+            with open("files/dispatcher.txt", "a") as file:
+                file.write("Firm name: {}\n".format(firm_name))
+                file.write("Address: {}\n".format(address))
+                file.write("Phone number: {}\n".format(phone_number))
+                file.write("PIB: {}\n".format(pib))
+                file.write("Work experience: {}\n".format(experience))
+                file.write("\n")
+
+            messagebox.showinfo("Success", "Dispatcher successfully сreated.")
+        except Exception as e:
+            messagebox.showerror("Error", f"An error occurred: {str(e)}")
+
+    sv_b = tk.Button(dispatcher_reg, text="Write to file", command=save_dis_reg)
+    sv_b.pack()
+    sv_b.place(relx=0.5, rely=0.8, anchor='s')
+
+def max_delivery_time():
+    max_delivery = 0
+    id = None
+
+    with open("files/contract.txt", "r") as file:
+        lines = file.readlines()
+        contract_info = {}
+        current_id = None
+
+        for line in lines:
+            if line.startswith("Contract ID:"):
+                if current_id:
+                    delivery_time = int(contract_info.get("Delivery time", 0))
+                    if delivery_time > max_delivery:
+                        max_delivery = delivery_time
+                        id = current_id
+
+                current_id = line.strip().replace("Contract ID: ", "")
+                contract_info = {}
+
+            if ":" in line:
+                key, value = map(str.strip, line.split(":", 1))
+                contract_info[key] = value
+
+        if current_id:
+            delivery_time = int(contract_info.get("Delivery time", 0))
+            if delivery_time > max_delivery:
+                max_delivery = delivery_time
+                id = current_id
+
+    if id:
+        with open("files/max_delivery_time.txt", "w") as output_file:
+            output_file.write(f"Contract ID: {id}\n")
+            output_file.write(f"Max delivery time: {max_delivery} hours\n")
+
+        messagebox.showinfo("Success", "Max delivery time saved in file")
+    else:
+        messagebox.showerror("No contracts", "No contracts found in file.")
+
+
+def most_popular_destination():
+    destination_counts = {}
+    most_popular_destination = None
+    max_count = 0
+
+    with open("files/contract.txt", "r") as file:
+        lines = file.readlines()
+
+        for line in lines:
+            if line.startswith("Arrival station:"):
+                destination = line.strip().replace("Arrival station: ", "")
+                destination_counts[destination] = destination_counts.get(destination, 0) + 1
+
+                if destination_counts[destination] > max_count:
+                    max_count = destination_counts[destination]
+                    most_popular_destination = destination
+
+    if most_popular_destination:
+        with open("files/pop_arrSt.txt", "w") as output_file:
+            output_file.write(f"Most popular arrival station: {most_popular_destination}\n")
+            output_file.write(f"Number of contracts: {max_count}\n")
+
+        messagebox.showinfo("Success", "Most popular destination saved in file")
+    else:
+        messagebox.showerror("No contracts", "No contracts with destination found in the file.")
+
+def calculate_avg_time():
+    total_delivery_time = 0
+    contract_count = 0
+
+    with open("files/contract.txt", "r") as file:
+        lines = file.readlines()
+        contract_info = {}
+        id = None
+
+        for line in lines:
+            if line.startswith("Contract ID:"):
+                if id:
+                    delivery_time = int(contract_info.get("Delivery time", 0))
+                    total_delivery_time += delivery_time
+                    contract_count += 1
+
+                id = line.strip().replace("Contract ID: ", "")
+                contract_info = {}
+
+            if ":" in line:
+                key, value = map(str.strip, line.split(":", 1))
+                contract_info[key] = value
+
+        if id:
+            delivery_time = int(contract_info.get("Delivery time", 0))
+            total_delivery_time += delivery_time
+            contract_count += 1
+
+    if contract_count > 0:
+        average_delivery_time = total_delivery_time / contract_count
+        messagebox.showinfo("Average delivery time", f"Average delivery time: {average_delivery_time} hours")
+
+        with open("files/avg_time.txt", "w") as output_file:
+            output_file.write(f"Average delivery time: {average_delivery_time} hours")
+
+    else:
+        messagebox.showerror("No contracts", "No contracts found in the file.")
+
 
 def register_client():
     user_window("Client")

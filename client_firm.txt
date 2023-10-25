@@ -1,5 +1,0 @@
-Firm Name: sds
-Address: adresa
-Phone Number: 3333
-PIB: drdr
-

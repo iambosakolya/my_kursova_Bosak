@@ -1,0 +1,6 @@
+Firm name: gg
+Address: g
+Phone number: g
+PIB: 55
+Work experience: 66
+

@@ -3,7 +3,7 @@ from System_user import SystemUser
 class Dispatcher(SystemUser):
     def __init__(self, firm_name, address, phone_number, pib, experience):
         super().__init__(firm_name, address, pib, phone_number)
-        self.contract = Contract
+        self.contracts = {}
         self.experience = experience
 
     def set_experience(self, experience):
