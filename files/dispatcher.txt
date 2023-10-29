@@ -1,6 +1,6 @@
-Firm name: gg
-Address: g
-Phone number: g
-PIB: 55
-Work experience: 66
+Firm name: FIRM
+Address: ADRESA
+Phone number: 0664117062
+PIB: TTT
+Work experience: 7.0
 

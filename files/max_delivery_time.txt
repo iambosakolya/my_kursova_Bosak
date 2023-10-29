@@ -1,2 +1,0 @@
-Contract ID: 1
-Max delivery time: 5555 hours
