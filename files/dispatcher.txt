@@ -1,6 +1,6 @@
-Firm name: FIRM
-Address: ADRESA
-Phone number: 0664117062
-PIB: TTT
-Work experience: 7.0
+Firm name: name
+Address: adresa
+Phone number: 0664115020
+PIB: Bosak O.S.
+Work experience: 40.0
 

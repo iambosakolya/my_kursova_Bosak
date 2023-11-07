@@ -6,7 +6,6 @@ class Client(SystemUser):
         self.contracts = {}
 
     # унаслідовані віртуальні методи від SystemUser
-
     def log_in(self):
         print(f"You entered the system as a client.")
 

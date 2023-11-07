@@ -1,0 +1,2 @@
+Most popular arrival station: arr
+Number of contracts: 2

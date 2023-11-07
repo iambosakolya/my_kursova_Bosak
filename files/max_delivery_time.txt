@@ -1,0 +1,2 @@
+Contract ID: 122
+Max delivery time: 200 hours
