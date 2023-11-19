@@ -1,1 +1,1 @@
-Average delivery time: 125.0 hours
+Average delivery time: 60.0 days

@@ -1,6 +1,5 @@
-Contract ID: 12
+Contract ID: 1
 Arrival Station: arr
 
-Contract ID: 122
-Arrival Station: arr
-
+Contract ID: 2
+Arrival station: 33
