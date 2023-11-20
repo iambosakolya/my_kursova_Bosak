@@ -9,11 +9,11 @@ Date of conclusion: 2020-12-10
 Cost: 5000 UAH
 
 Contract ID: 2
-Departure station: 3
-Arrival station: 33
-Insurance sum: 
-Cargo type: 
-Delivery time: 
-Weight: 
-Date of conclusion: 
-Cost: 
+Departure station: dep1
+Arrival station: arr1
+Insurance sum: 800.00 UAH
+Cargo type: type
+Delivery time(in days): 90
+Weight: 90.00 KG
+Date of conclusion: 2020-12-12
+Cost: 790.00 UAH

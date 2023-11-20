@@ -416,6 +416,7 @@ def save(contract):
         file.write("\n")
 
     with open("files/addresses.txt", "a") as arrivalSt_file:
+        arrivalSt_file.write(f"\nAll addresses at the current moment:\n")
         arrivalSt_file.write(f"Contract ID: {contract.contract_id}\n")
         arrivalSt_file.write(f"Arrival Station: {contract.arr_st}\n")
         arrivalSt_file.write("\n")
@@ -550,11 +551,30 @@ def update_contract():
                     "Arrival station": arr_entry.get(),
                     "Insurance sum": insurance_entry.get(),
                     "Cargo type": type_entry.get(),
-                    "Delivery time": time_entry.get(),
+                    "Delivery time(in days)": time_entry.get(),
                     "Weight": weight_entry.get(),
                     "Date of conclusion": date_entry.get(),
                     "Cost": cost_entry.get()
                 }
+
+                if not all(new_data.values()):
+                    messagebox.showerror("Error", "All fields must be filled.")
+                    update_contract_window.destroy()
+                    return
+
+                try:
+                    new_data["Insurance sum"] = f"{Decimal(new_data['Insurance sum']):,.2f} UAH"
+                    new_data["Delivery time(in days)"] = int(new_data["Delivery time(in days)"])
+                    new_data["Weight"] = f"{float(new_data['Weight']):,.2f} KG"
+                    new_data["Date of conclusion"] = datetime.strptime(new_data["Date of conclusion"],
+                                                                       "%Y-%m-%d").date()
+                    new_data["Cost"] = f"{Decimal(new_data['Cost']):,.2f} UAH"
+
+                except ValueError:
+                    messagebox.showerror("Error", "Invalid data type for one or more fields.")
+                    update_contract_window.destroy()
+                    return
+
                 update_contract_data(contract_id, new_data)
                 update_contract_window.destroy()
 
@@ -562,6 +582,7 @@ def update_contract():
                                     font=("Cooper Black", 11))
             save_button.pack()
             save_button.place(x=170, y=300)
+
         else:
             messagebox.showinfo("Info", "Please select a contract to update.")
 
@@ -607,7 +628,7 @@ def update_contract():
                 elif addr_line.startswith("Contract ID:") and not contract_id in addr_line:
                     is_contract_id_found = False
 
-                if is_contract_id_found and addr_line.startswith("Arrival Station:"):
+                if is_contract_id_found and addr_line.startswith("Arrival station:"):
                     for key, value in new_data.items():
                         if key == "Arrival station":
                             new_addr_lines.append(f"{key}: {value}\n")
@@ -677,9 +698,6 @@ def update_contract():
 
     delete_button = Button(update_window, text="Delete contract", font=("Cooper Black", 11), command=del_contract)
     delete_button.pack(pady=10)
-
-update_contract_button = Button(root, text="Update contract", command=update_contract, font=("Cooper Black", 15))
-update_contract_button.pack()
 
 def client_reg():
     client_reg = tk.Toplevel(root)
@@ -959,7 +977,6 @@ def calculate_avg_time():
 
     else:
         messagebox.showerror("No contracts", "No contracts found in the file.")
-
 
 def register_client():
     user_init("Client")
