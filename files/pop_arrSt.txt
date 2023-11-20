@@ -1,2 +1,2 @@
-Most popular arrival station: arr
-Number of contracts with such address: 1
+Most popular arrival station: 55
+Number of contracts with such address: 2

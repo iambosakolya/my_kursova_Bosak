@@ -10,7 +10,7 @@ Cost: 5000 UAH
 
 Contract ID: 2
 Departure station: dep1
-Arrival station: arr1
+Arrival station: ar1
 Insurance sum: 800.00 UAH
 Cargo type: type
 Delivery time(in days): 90

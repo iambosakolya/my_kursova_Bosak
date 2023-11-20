@@ -2,4 +2,4 @@ Contract ID: 1
 Arrival station: 55
 
 Contract ID: 2
-Arrival station: arr1
+Arrival station: ar1

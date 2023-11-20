@@ -474,74 +474,74 @@ def update_contract():
 
             existing_data = get_contract_data(contract_id)
 
-            dep_lb = Label(update_contract_window, text="Departure station:", font=("Cooper Black", 10))
+            dep_lb = Label(update_window, text="Departure station:", font=("Cooper Black", 10))
             dep_lb.pack()
             dep_lb.place(x=10, y=40)
-            dep_entry = Entry(update_contract_window)
+            dep_entry = Entry(update_window)
             dep_entry.pack()
             dep_entry.place(x=190, y=40)
 
-            arr_lb = Label(update_contract_window, text="Arrival station:", font=("Cooper Black", 10))
+            arr_lb = Label(update_window, text="Arrival station:", font=("Cooper Black", 10))
             arr_lb.pack()
             arr_lb.place(x=10, y=70)
-            arr_entry = Entry(update_contract_window)
+            arr_entry = Entry(update_window)
             arr_entry.pack()
             arr_entry.place(x=190, y=70)
 
-            type_lb = Label(update_contract_window, text="Cargo type:", font=("Cooper Black", 10))
+            type_lb = Label(update_window, text="Cargo type:", font=("Cooper Black", 10))
             type_lb.pack()
             type_lb.place(x=10, y=100)
-            type_entry = Entry(update_contract_window)
+            type_entry = Entry(update_window)
             type_entry.pack()
             type_entry.place(x=190, y=100)
 
-            insurance_lb = Label(update_contract_window, text="Insurance sum:", font=("Cooper Black", 10))
+            insurance_lb = Label(update_window, text="Insurance sum:", font=("Cooper Black", 10))
             insurance_lb.pack()
             insurance_lb.place(x=10, y=130)
-            val_lb = Label(update_contract_window, text="UAH", font=("Cooper Black", 10))
+            val_lb = Label(update_window, text="UAH", font=("Cooper Black", 10))
             val_lb.pack()
             val_lb.place(x=320, y=130)
-            insurance_entry = Entry(update_contract_window)
+            insurance_entry = Entry(update_window)
             insurance_entry.pack()
             insurance_entry.place(x=190, y=130)
 
-            time_lb = Label(update_contract_window, text="Delivery time:", font=("Cooper Black", 10))
+            time_lb = Label(update_window, text="Delivery time:", font=("Cooper Black", 10))
             time_lb.pack()
             time_lb.place(x=10, y=160)
-            t_lb = Label(update_contract_window, text="day(s)", font=("Cooper Black", 10))
+            t_lb = Label(update_window, text="day(s)", font=("Cooper Black", 10))
             t_lb.pack()
             t_lb.place(x=320, y=160)
-            time_entry = Entry(update_contract_window)
+            time_entry = Entry(update_window)
             time_entry.pack()
             time_entry.place(x=190, y=160)
 
-            weight_lb = Label(update_contract_window, text="Weight:", font=("Cooper Black", 10))
+            weight_lb = Label(update_window, text="Weight:", font=("Cooper Black", 10))
             weight_lb.pack()
             weight_lb.place(x=10, y=190)
-            w_lb = Label(update_contract_window, text="KG", font=("Cooper Black", 10))
+            w_lb = Label(update_window, text="KG", font=("Cooper Black", 10))
             w_lb.pack()
             w_lb.place(x=320, y=190)
-            weight_entry = Entry(update_contract_window)
+            weight_entry = Entry(update_window)
             weight_entry.pack()
             weight_entry.place(x=190, y=190)
 
-            date_lb = Label(update_contract_window, text="Contract date:", font=("Cooper Black", 10))
+            date_lb = Label(update_window, text="Contract date:", font=("Cooper Black", 10))
             date_lb.pack()
             date_lb.place(x=10, y=220)
-            d_lb = Label(update_contract_window, text="(Y-M-D)", font=("Cooper Black", 10))
+            d_lb = Label(update_window, text="(Y-M-D)", font=("Cooper Black", 10))
             d_lb.pack()
             d_lb.place(x=320, y=220)
-            date_entry = Entry(update_contract_window)
+            date_entry = Entry(update_window)
             date_entry.pack()
             date_entry.place(x=190, y=220)
 
-            cost_lb = Label(update_contract_window, text="Cost:", font=("Cooper Black", 10))
+            cost_lb = Label(update_window, text="Cost:", font=("Cooper Black", 10))
             cost_lb.pack()
             cost_lb.place(x=10, y=250)
-            val_lb = Label(update_contract_window, text="UAH", font=("Cooper Black", 10))
+            val_lb = Label(update_window, text="UAH", font=("Cooper Black", 10))
             val_lb.pack()
             val_lb.place(x=320, y=250)
-            cost_entry = Entry(update_contract_window)
+            cost_entry = Entry(update_window)
             cost_entry.pack()
             cost_entry.place(x=190, y=250)
 
@@ -680,7 +680,7 @@ def update_contract():
     back_label.place(relwidth=1, relheight=1)
     back_label.image = back_image
 
-    contracts_listbox = Listbox(update_window, selectmode="SINGLE")
+    contracts_listbox = Listbox(update_window, selectmode="SINGLE", width=50, height=10)
     contracts_listbox.pack(pady=10)
 
     try:
@@ -692,12 +692,23 @@ def update_contract():
     except FileNotFoundError:
         messagebox.showerror("Error", "File 'contract.txt' not found.")
 
+    def go_back():
+        update_window.destroy()
+        user_init(user_type)
+
+
+    back_button = tk.Button(update_window, text="Go back", command=go_back, font=("Cooper Black", 11))
+    back_button.pack()
+    back_button.place(x=380, y=350)
+
     update_button = Button(update_window, text="Update contract", font=("Cooper Black", 11),
                            command=update_selected_contract)
-    update_button.pack(pady=10)
+    update_button.pack()
+    update_button.place(x=100,y=230)
 
     delete_button = Button(update_window, text="Delete contract", font=("Cooper Black", 11), command=del_contract)
-    delete_button.pack(pady=10)
+    delete_button.pack()
+    delete_button.place(x=250,y=230)
 
 def client_reg():
     client_reg = tk.Toplevel(root)
@@ -922,7 +933,8 @@ def most_popular_destination():
     destination_counts = {}
     most_popular_destination = None
     max_count = 0
-    with open("files/contract.txt", "r") as file:
+
+    with open("files/addresses.txt", "r") as file:
         lines = file.readlines()
 
         for line in lines:
@@ -935,13 +947,16 @@ def most_popular_destination():
                     most_popular_destination = destination
 
     if most_popular_destination:
-        with open("files/pop_arrSt.txt", "w") as output_file:
-            output_file.write(f"Most popular arrival station: {most_popular_destination}\n")
-            output_file.write(f"Number of contracts with such address: {max_count}\n")
+        if max_count > 1:
+            with open("files/pop_arrSt.txt", "w") as output_file:
+                output_file.write(f"Most popular arrival station: {most_popular_destination}\n")
+                output_file.write(f"Number of contracts with such address: {max_count}\n")
 
-        messagebox.showinfo("Success", "Most popular destination saved in file")
+            messagebox.showinfo("Success", "Most popular destination saved in file")
+        else:
+            messagebox.showinfo("No Repeated Destinations", "No destination appears more than once in the file.")
     else:
-        messagebox.showerror("No contracts", "No contracts with destination found in the file.")
+        messagebox.showerror("No Contracts", "No contracts with destination found in the file.")
 
 def calculate_avg_time():
     total_delivery_time = 0
