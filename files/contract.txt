@@ -1,22 +1,22 @@
 Contract ID: 12
-Departure station: dep1
-Arrival station: arr1
-Insurance sum: 6000.00 UAH
+Departure station: hehe
+Arrival station: hehe
+Insurance sum: 780.00 UAH
 Cargo type: type
-Delivery time(in days): 50
-Weight: 500.00 KG
-Date of conclusion: 2020-12-12
-Cost: 8000.00 UAH
+Delivery time(in days): 23
+Weight: 6,565.00 KG
+Date of conclusion: 2020-10-02
+Cost: 890.00 UAH
 
 Contract ID: 13
-Departure station: der12
-Arrival station: der44
-Insurance sum: 555.00 UAH
-Cargo type: ttt
-Delivery time(in days): 555
-Weight: 555.00 KG
-Date of conclusion: 2020-12-12
-Cost: 4,805.00 UAH
+Departure station: haha
+Arrival station: haha
+Insurance sum: 980.00 UAH
+Cargo type: haha
+Delivery time(in days): 23
+Weight: 5,608.00 KG
+Date of conclusion: 2020-10-09
+Cost: 9,800.00 UAH
 
 Contract ID: 44
 Departure station: dr

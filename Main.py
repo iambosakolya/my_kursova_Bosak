@@ -620,6 +620,7 @@ def update_contract():
                 if is_contract_block and line.startswith("Contract ID:"):
                     for key, value in new_data.items():
                         new_lines.append(f"{key}: {value}\n")
+                    new_lines.append("\n")
                 elif not is_contract_block:
                     new_lines.append(line)
 
@@ -643,7 +644,7 @@ def update_contract():
                 if is_contract_id_found and addr_line.startswith("Arrival station:"):
                     for key, value in new_data.items():
                         if key == "Arrival station":
-                            new_addr_lines.append(f"{key}: {value}\n")
+                            new_addr_lines.append(f"{key}: {value}\n\n")
                 elif not is_contract_id_found:
                     new_addr_lines.append(addr_line)
 
@@ -706,7 +707,6 @@ def update_contract():
 
     def go_back():
         update_window.destroy()
-        user_init(reg_type)
 
     back_button = tk.Button(update_window, text="Go back", command=go_back, font=("Cooper Black", 11))
     back_button.pack()
