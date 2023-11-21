@@ -1,6 +1,6 @@
-Firm name: firma
+Firm name: name
 Address: adresa
-Phone number(+38): 0664417062
-PIB: Bosak O.S.
-Work experience: 15.0 years
+Phone number(+38): 0664112052
+PIB: ss
+Work experience: 12.0 years
 

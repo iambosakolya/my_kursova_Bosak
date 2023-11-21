@@ -34,7 +34,3 @@ class SystemUser(ABC):
     @abstractmethod
     def log_in(self):
         pass
-
-    @abstractmethod
-    def log_out(self):
-        pass

@@ -16,5 +16,3 @@ class Dispatcher(SystemUser):
     def log_in(self):
         print(f"You {self.pib} entered to the system as a dispatcher.")
 
-    def log_out(self):
-        print(f"You {self.pib} logged out the system as a dispatcher.")

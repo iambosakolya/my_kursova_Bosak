@@ -1,10 +1,5 @@
-Firm name: namee
+Firm name: firm
 Address: adresa
-Phone number(+38): 0661004054
-PIB: Bosak O.S.
-
-Firm name: name firm
-Address: adresa
-Phone number(+38): 0954758852
-PIB: bbb
+Phone number(+38): 0667445285
+PIB: gg
 

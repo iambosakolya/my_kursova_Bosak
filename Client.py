@@ -9,8 +9,6 @@ class Client(SystemUser):
     def log_in(self):
         print(f"You entered the system as a client.")
 
-    def log_out(self):
-        print(f"You logged out of the system as a client.")
 
 
 

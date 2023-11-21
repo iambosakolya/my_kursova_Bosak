@@ -9,6 +9,7 @@ from Contract import Contract
 from decimal import Decimal
 from datetime import datetime
 from tkinter import PhotoImage
+from collections import namedtuple
 
 user_window = None
 client_created = False
@@ -31,7 +32,6 @@ def check_user_creation():
 # constructor Tk()
 root = tk.Tk()
 root.geometry("750x650")
-#root.iconbitmap("img/main.ico")
 root.title("Rail Cargo Solutions")
 root.resizable(width=False, height=False)
 bg_image = PhotoImage(file="img/RailCargoSol.png")
@@ -125,7 +125,6 @@ def user_init(user_type):
             else:
                 data_text.delete(1.0, tk.END)
                 data_text.insert(tk.INSERT, contracts)
-
     def clear_all_files():
         file_paths = ["files/client_firm.txt", "files/dispatcher.txt", "files/contract.txt", "files/addresses.txt",
                       "files/max_delivery_time.txt", "files/pop_arrSt.txt", "files/avg_time.txt"]
@@ -154,7 +153,7 @@ def user_init(user_type):
         view_address_btn = Button(user_window, text="List of delivery addresses", command=view_address, font=("Cooper Black", 11))
         view_firms_btn = Button(user_window, text="List of client's firms", command=view_firms, font=("Cooper Black", 11))
         clear_all_btn = Button(user_window, text="Clear all files", command=clear_all_files, font=("Cooper Black", 11))
-        update_contract_btn = Button(user_window, text="Update Contract", command=update_contract, font=("Cooper Black", 11))
+        update_contract_btn = Button(user_window, text="Update contract", command=update_contract, font=("Cooper Black", 11))
 
         new_client_btn.pack()
         new_contract_btn.pack()
@@ -195,7 +194,7 @@ def user_init(user_type):
         view_address_btn = Button(user_window, text="List of addresses", command=view_address, font=("Cooper Black", 11))
         view_firms_btn = Button(user_window, text="List of client's firms", command=view_firms, font=("Cooper Black", 11))
         clear_all_btn = Button(user_window, text="Clear all files", command=clear_all_files, font=("Cooper Black", 11))
-        update_contract_btn = Button(user_window, text="Update Contract", command=update_contract, font=("Cooper Black", 11))
+        update_contract_btn = Button(user_window, text="Update contract", command=update_contract, font=("Cooper Black", 11))
 
         max_btn = Button(user_window, text="Max delivery time",command=max_delivery_time, font=("Cooper Black", 11))
         view_max_btn = Button(user_window, text="View", command=max_time,font=("Cooper Black", 11))
@@ -261,7 +260,11 @@ def user_init(user_type):
         dispatcher_label.pack()
         dispatcher_label.place(x=200, y=20)
 
+Contract = namedtuple("Contract", ["contract_id", "dep_st", "arr_st", "insurance_sum", "cargo_type",
+                                   "delivery_time", "weight", "date", "cost"])
+contracts_set = set()
 def create_contract():
+    global contracts_set
     contract_window = Toplevel(root)
     contract_window.title("Create new contract")
     contract_window.resizable(width=False, height=False)
@@ -273,6 +276,7 @@ def create_contract():
     back_label.image = back_image
 
     def save_contract():
+        global contracts_set
         contract_id = id_entry.get()
         if id_exists(contract_id):
             messagebox.showerror("Error", "Contract with this ID already exists.")
@@ -297,12 +301,18 @@ def create_contract():
             weight = float(weight)
             date = datetime.strptime(date, "%Y-%m-%d").date()
             cost = Decimal(cost)
+
+            insurance_sum = f"{insurance_sum:.2f}"
+            weight = f"{weight:.2f}"
+            cost = f"{cost:.2f}"
+
         except ValueError:
             messagebox.showerror("Error", "Invalid data type for one or more fields.")
             contract_window.destroy()
             return
 
         contract = Contract(contract_id, dep_st, arr_st, insurance_sum, cargo_type, delivery_time, weight, date, cost)
+        contracts_set.add(contract)
         save(contract)
 
         messagebox.showinfo("Success", "Contract successfully created.")
@@ -313,8 +323,12 @@ def create_contract():
         with open("files/contract.txt", "r") as file:
             lines = file.readlines()
             for line in lines:
-                if line.startswith("Contract ID:") and contract_id in line:
-                    return True
+
+                if "Contract ID:" in line and ":" in line.split(":")[1]:
+                    existing_id = line.split(":")[1].strip()
+
+                    if existing_id == contract_id:
+                        return True
         return False
 
     # labels & entries
@@ -401,7 +415,6 @@ def create_contract():
                                  command=save_contract)
     cr_btn.pack()
     cr_btn.place(x=130, y=290)
-
 def save(contract):
     with open("files/contract.txt", "a") as file:
         file.write(f"Contract ID: {contract.contract_id}\n")
@@ -416,9 +429,8 @@ def save(contract):
         file.write("\n")
 
     with open("files/addresses.txt", "a") as arrivalSt_file:
-        arrivalSt_file.write(f"\nAll addresses at the current moment:\n")
         arrivalSt_file.write(f"Contract ID: {contract.contract_id}\n")
-        arrivalSt_file.write(f"Arrival Station: {contract.arr_st}\n")
+        arrivalSt_file.write(f"Arrival station: {contract.arr_st}\n")
         arrivalSt_file.write("\n")
 
 def update_contract():
@@ -474,74 +486,74 @@ def update_contract():
 
             existing_data = get_contract_data(contract_id)
 
-            dep_lb = Label(update_window, text="Departure station:", font=("Cooper Black", 10))
+            dep_lb = Label(update_contract_window, text="Departure station:", font=("Cooper Black", 10))
             dep_lb.pack()
             dep_lb.place(x=10, y=40)
-            dep_entry = Entry(update_window)
+            dep_entry = Entry(update_contract_window)
             dep_entry.pack()
             dep_entry.place(x=190, y=40)
 
-            arr_lb = Label(update_window, text="Arrival station:", font=("Cooper Black", 10))
+            arr_lb = Label(update_contract_window, text="Arrival station:", font=("Cooper Black", 10))
             arr_lb.pack()
             arr_lb.place(x=10, y=70)
-            arr_entry = Entry(update_window)
+            arr_entry = Entry(update_contract_window)
             arr_entry.pack()
             arr_entry.place(x=190, y=70)
 
-            type_lb = Label(update_window, text="Cargo type:", font=("Cooper Black", 10))
+            type_lb = Label(update_contract_window, text="Cargo type:", font=("Cooper Black", 10))
             type_lb.pack()
             type_lb.place(x=10, y=100)
-            type_entry = Entry(update_window)
+            type_entry = Entry(update_contract_window)
             type_entry.pack()
             type_entry.place(x=190, y=100)
 
-            insurance_lb = Label(update_window, text="Insurance sum:", font=("Cooper Black", 10))
+            insurance_lb = Label(update_contract_window, text="Insurance sum:", font=("Cooper Black", 10))
             insurance_lb.pack()
             insurance_lb.place(x=10, y=130)
-            val_lb = Label(update_window, text="UAH", font=("Cooper Black", 10))
+            val_lb = Label(update_contract_window, text="UAH", font=("Cooper Black", 10))
             val_lb.pack()
             val_lb.place(x=320, y=130)
-            insurance_entry = Entry(update_window)
+            insurance_entry = Entry(update_contract_window)
             insurance_entry.pack()
             insurance_entry.place(x=190, y=130)
 
-            time_lb = Label(update_window, text="Delivery time:", font=("Cooper Black", 10))
+            time_lb = Label(update_contract_window, text="Delivery time:", font=("Cooper Black", 10))
             time_lb.pack()
             time_lb.place(x=10, y=160)
-            t_lb = Label(update_window, text="day(s)", font=("Cooper Black", 10))
+            t_lb = Label(update_contract_window, text="day(s)", font=("Cooper Black", 10))
             t_lb.pack()
             t_lb.place(x=320, y=160)
-            time_entry = Entry(update_window)
+            time_entry = Entry(update_contract_window)
             time_entry.pack()
             time_entry.place(x=190, y=160)
 
-            weight_lb = Label(update_window, text="Weight:", font=("Cooper Black", 10))
+            weight_lb = Label(update_contract_window, text="Weight:", font=("Cooper Black", 10))
             weight_lb.pack()
             weight_lb.place(x=10, y=190)
-            w_lb = Label(update_window, text="KG", font=("Cooper Black", 10))
+            w_lb = Label(update_contract_window, text="KG", font=("Cooper Black", 10))
             w_lb.pack()
             w_lb.place(x=320, y=190)
-            weight_entry = Entry(update_window)
+            weight_entry = Entry(update_contract_window)
             weight_entry.pack()
             weight_entry.place(x=190, y=190)
 
-            date_lb = Label(update_window, text="Contract date:", font=("Cooper Black", 10))
+            date_lb = Label(update_contract_window, text="Contract date:", font=("Cooper Black", 10))
             date_lb.pack()
             date_lb.place(x=10, y=220)
-            d_lb = Label(update_window, text="(Y-M-D)", font=("Cooper Black", 10))
+            d_lb = Label(update_contract_window, text="(Y-M-D)", font=("Cooper Black", 10))
             d_lb.pack()
             d_lb.place(x=320, y=220)
-            date_entry = Entry(update_window)
+            date_entry = Entry(update_contract_window)
             date_entry.pack()
             date_entry.place(x=190, y=220)
 
-            cost_lb = Label(update_window, text="Cost:", font=("Cooper Black", 10))
+            cost_lb = Label(update_contract_window, text="Cost:", font=("Cooper Black", 10))
             cost_lb.pack()
             cost_lb.place(x=10, y=250)
-            val_lb = Label(update_window, text="UAH", font=("Cooper Black", 10))
+            val_lb = Label(update_contract_window, text="UAH", font=("Cooper Black", 10))
             val_lb.pack()
             val_lb.place(x=320, y=250)
-            cost_entry = Entry(update_window)
+            cost_entry = Entry(update_contract_window)
             cost_entry.pack()
             cost_entry.place(x=190, y=250)
 
@@ -694,8 +706,7 @@ def update_contract():
 
     def go_back():
         update_window.destroy()
-        user_init(user_type)
-
+        user_init(reg_type)
 
     back_button = tk.Button(update_window, text="Go back", command=go_back, font=("Cooper Black", 11))
     back_button.pack()
@@ -704,12 +715,14 @@ def update_contract():
     update_button = Button(update_window, text="Update contract", font=("Cooper Black", 11),
                            command=update_selected_contract)
     update_button.pack()
-    update_button.place(x=100,y=230)
+    update_button.place(x=100, y=230)
 
     delete_button = Button(update_window, text="Delete contract", font=("Cooper Black", 11), command=del_contract)
     delete_button.pack()
-    delete_button.place(x=250,y=230)
+    delete_button.place(x=250, y=230)
 
+Client = namedtuple("Client", ["firm_name", "address", "phone_number", "pib"])
+clients_set = set()
 def client_reg():
     client_reg = tk.Toplevel(root)
     client_reg.title("Client registration")
@@ -774,6 +787,8 @@ def client_reg():
                 raise ValueError("Phone number must be a 10-digit numeric value")
 
             client = Client(firm_name, address, phone_number, pib)
+            clients_set.add(client)
+
             with open("files/client_firm.txt", "a") as file:
                 file.write("Firm name: {}\n".format(firm_name))
                 file.write("Address: {}\n".format(address))
@@ -794,6 +809,8 @@ def client_reg():
     sv_btn.pack()
     sv_btn.place(relx=0.5, rely=0.9, anchor='s')
 
+Dispatcher = namedtuple("Dispatcher", ["firm_name", "address", "phone_number", "pib", "experience"])
+dispatchers_set = set()
 def dispatcher_reg():
     dispatcher_reg = tk.Toplevel(root)
     dispatcher_reg.title("Dispatcher registration")
@@ -872,6 +889,7 @@ def dispatcher_reg():
                 raise ValueError("Work experience must be a float")
 
             dispatcher = Dispatcher(firm_name, address, phone_number, pib, experience)
+            dispatchers_set.add(dispatcher)
             with open("files/dispatcher.txt", "a") as file:
                 file.write("Firm name: {}\n".format(firm_name))
                 file.write("Address: {}\n".format(address))
@@ -928,7 +946,6 @@ def max_delivery_time():
         messagebox.showinfo("Success", "Max delivery time saved in file")
     else:
         messagebox.showerror("No contracts", "No contracts found in file.")
-
 def most_popular_destination():
     destination_counts = {}
     most_popular_destination = None
@@ -937,8 +954,12 @@ def most_popular_destination():
     with open("files/addresses.txt", "r") as file:
         lines = file.readlines()
 
+        current_contract_id = None
+
         for line in lines:
-            if line.startswith("Arrival station:"):
+            if line.startswith("Contract ID:"):
+                current_contract_id = line.strip().replace("Contract ID: ", "")
+            elif line.startswith("Arrival station:") and current_contract_id:
                 destination = line.strip().replace("Arrival station: ", "")
                 destination_counts[destination] = destination_counts.get(destination, 0) + 1
 
@@ -957,7 +978,6 @@ def most_popular_destination():
             messagebox.showinfo("No Repeated Destinations", "No destination appears more than once in the file.")
     else:
         messagebox.showerror("No Contracts", "No contracts with destination found in the file.")
-
 def calculate_avg_time():
     total_delivery_time = 0
     contract_count = 0
@@ -992,7 +1012,6 @@ def calculate_avg_time():
 
     else:
         messagebox.showerror("No contracts", "No contracts found in the file.")
-
 def register_client():
     user_init("Client")
 def register_dispatcher():

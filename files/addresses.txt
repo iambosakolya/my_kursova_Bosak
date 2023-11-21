@@ -1,5 +1,11 @@
-Contract ID: 1
-Arrival station: 55
+Contract ID: 12
+Arrival station: arr1
 
-Contract ID: 2
-Arrival station: ar1
+Contract ID: 13
+Arrival station: arr1
+
+Contract ID: 44
+Arrival station: asas34
+
+Contract ID: 66
+Arrival station: lplp67
