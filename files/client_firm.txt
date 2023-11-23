@@ -1,5 +1,15 @@
-Firm name: firm
-Address: adresa
-Phone number(+38): 0667445285
-PIB: gg
+Firm name: Hugo
+Address: Odesa, Mykhalivska 99
+Phone number(+38): 0664115230
+PIB: Petho G.D.
+
+Firm name: Gray
+Address: New York, Wall 87
+Phone number(+38): 4807445265
+PIB: Werwek D.G.
+
+Firm name: Samerlo
+Address: Lviv, Suhivska 56
+Phone number(+38): 0674115285
+PIB: Tarasen K.S.
 

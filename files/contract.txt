@@ -1,39 +1,59 @@
-Contract ID: 12
-Departure station: hehe
-Arrival station: hehe
-Insurance sum: 780.00 UAH
-Cargo type: type
-Delivery time(in days): 23
-Weight: 6,565.00 KG
-Date of conclusion: 2020-10-02
-Cost: 890.00 UAH
+Contract ID: 1
+Departure station: Veluka 6
+Arrival station: Ropvo 45
+Insurance sum: 9000.00 UAH
+Cargo type: grain
+Delivery time(in days): 40
+Weight: 500.00 KG
+Date of conclusion: 2023-12-12
+Cost: 4500.00 UAH
 
-Contract ID: 13
-Departure station: haha
-Arrival station: haha
-Insurance sum: 980.00 UAH
-Cargo type: haha
-Delivery time(in days): 23
-Weight: 5,608.00 KG
-Date of conclusion: 2020-10-09
-Cost: 9,800.00 UAH
+Contract ID: 2
+Departure station: Kyiv Central
+Arrival station: Lviv West
+Insurance sum: 12000.00 UAH
+Cargo type: electronics
+Delivery time (in days): 25
+Weight: 800.00 KG
+Date of conclusion: 2023-11-20
+Cost: 6000.00 UAH
 
-Contract ID: 44
-Departure station: dr
-Arrival station: asas34
-Insurance sum: 55.00 UAH
-Cargo type: rr
-Delivery time(in days): 5555
-Weight: 5.00 KG
-Date of conclusion: 2020-12-12
-Cost: 66.00 UAH
-
-Contract ID: 66
-Departure station: lalla
-Arrival station: lplp67
-Insurance sum: 66.00 UAH
-Cargo type: typepepe
-Delivery time(in days): 66666
-Weight: 66.00 KG
+Contract ID: 3
+Departure station: Odessa Port
+Arrival station: Kharkiv East
+Insurance sum: 15000.00 UAH
+Cargo type: chemicals
+Delivery time (in days): 35
+Weight: 120.00 KG
 Date of conclusion: 2023-10-15
-Cost: 80.00 UAH
+Cost: 7500.00 UAH
+
+Contract ID: 4
+Departure station: Dnipro South
+Arrival station: Zaporizhia
+Insurance sum: 8000.00 UAH
+Cargo type: machinery
+Delivery time (in days): 28
+Weight: 100.00 KG
+Date of conclusion: 2023-09-05
+Cost: 4000.00 UAH
+
+Contract ID: 5
+Departure station: Chernivtsi South
+Arrival station: Odesa South
+Insurance sum: 8,500.00 UAH
+Cargo type: textiles
+Delivery time(in days): 45
+Weight: 5,800.00 KG
+Date of conclusion: 2023-10-10
+Cost: 500.00 UAH
+
+Contract ID: 6
+Departure station: Chernivtsi
+Arrival station: Zaporizhia
+Insurance sum: 560.00 UAH
+Cargo type: textiles
+Delivery time(in days): 56
+Weight: 560.00 KG
+Date of conclusion: 2023-10-06
+Cost: 45,200.00 UAH

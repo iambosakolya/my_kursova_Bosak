@@ -1,6 +1,31 @@
-Firm name: name
-Address: adresa
-Phone number(+38): 0664112052
-PIB: ss
-Work experience: 12.0 years
+Firm name: Rail Cargo Solutions
+Address: Mikhakivska 89
+Phone number(+38): 0661004758
+PIB: Bosak O.S.
+Work experience: 15.0 years
+
+Firm name: Rail Cargo Solutions
+Address: Prosvitu 8
+Phone number(+38): 0957458852
+PIB: Shevchenko D.D.
+Work experience: 7.0 years
+
+Firm name: Rail Cargo Solutions
+Address: Pankeevska 78
+Phone number(+38): 0647895264
+PIB: Polop H.S.
+Work experience: 14.0 years
+
+Firm name: Rail Cargo Solutions
+Address: Dalnitska 1
+Phone number(+38): 0508261705
+PIB: Kolot E.V.
+Work experience: 27.0 years
+
+Firm name: Rail Cargo Solutions
+Address: Prosvitu 8
+Phone number(+38): 0664117062
+PIB: Shevchenko D.I.
+Work experience: 7.0 years
+
 

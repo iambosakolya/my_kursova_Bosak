@@ -1,2 +1,2 @@
-Contract ID: 66
-Max delivery time: 66666 days
+Contract ID: 1
+Max delivery time: 40 days

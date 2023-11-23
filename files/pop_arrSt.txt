@@ -1,2 +1,2 @@
-Most popular arrival station: arr1
+Most popular arrival station: Kharkiv East
 Number of contracts with such address: 2

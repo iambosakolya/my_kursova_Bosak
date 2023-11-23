@@ -85,6 +85,7 @@ def user_init(user_type):
             else:
                 data_text.delete(1.0, tk.END)
                 data_text.insert(tk.INSERT, contracts)
+
     def view_address():
         with open("files/addresses.txt", "r") as file:
             addresses = file.read()
@@ -93,6 +94,7 @@ def user_init(user_type):
             else:
                 data_text.delete(1.0, tk.END)
                 data_text.insert(tk.INSERT, addresses)
+
     def view_firms():
         with open("files/client_firm.txt", "r") as file:
             clients = file.read()
@@ -101,6 +103,16 @@ def user_init(user_type):
             else:
                 data_text.delete(1.0, tk.END)
                 data_text.insert(tk.INSERT, clients)
+
+    def view_dispatcher():
+        with open("files/dispatcher.txt", "r") as file:
+            dispatcher = file.read()
+            if not dispatcher:
+                messagebox.showerror("Empty File", "The file is empty.")
+            else:
+                data_text.delete(1.0, tk.END)
+                data_text.insert(tk.INSERT, dispatcher)
+
     def max_time():
         with open("files/max_delivery_time.txt", "r") as file:
             contracts = file.read()
@@ -109,6 +121,7 @@ def user_init(user_type):
             else:
                 data_text.delete(1.0, tk.END)
                 data_text.insert(tk.INSERT, contracts)
+
     def arrival_st():
         with open("files/pop_arrSt.txt", "r") as file:
             contracts = file.read()
@@ -117,6 +130,7 @@ def user_init(user_type):
             else:
                 data_text.delete(1.0, tk.END)
                 data_text.insert(tk.INSERT, contracts)
+
     def avg_time():
         with open("files/avg_time.txt", "r") as file:
             contracts = file.read()
@@ -125,6 +139,7 @@ def user_init(user_type):
             else:
                 data_text.delete(1.0, tk.END)
                 data_text.insert(tk.INSERT, contracts)
+
     def clear_all_files():
         file_paths = ["files/client_firm.txt", "files/dispatcher.txt", "files/contract.txt", "files/addresses.txt",
                       "files/max_delivery_time.txt", "files/pop_arrSt.txt", "files/avg_time.txt"]
@@ -138,7 +153,7 @@ def user_init(user_type):
         global client_created, dispatcher_created
         client_created = False
         dispatcher_created = False
-        messagebox.showinfo("Files Cleared", "All existing files have been cleared.")
+        messagebox.showinfo("Files cleared", "All existing files are cleared.")
         data_text.delete(1.0, tk.END)
 
     back_to_main_btn = Button(user_window, text="Go back", command=home_window,
@@ -147,13 +162,26 @@ def user_init(user_type):
     back_to_main_btn.place(x=660, y=600)
 
     if user_type == "Client":
-        new_client_btn = Button(user_window, text="Create new client", command=client_reg, font=("Cooper Black", 12))
-        new_contract_btn = Button(user_window, text="New contract", command=create_contract, font=("Cooper Black", 11))
-        view_contract_btn = Button(user_window, text="List of contracts", command=view_contract, font=("Cooper Black", 11))
-        view_address_btn = Button(user_window, text="List of delivery addresses", command=view_address, font=("Cooper Black", 11))
-        view_firms_btn = Button(user_window, text="List of client's firms", command=view_firms, font=("Cooper Black", 11))
-        clear_all_btn = Button(user_window, text="Clear all files", command=clear_all_files, font=("Cooper Black", 11))
-        update_contract_btn = Button(user_window, text="Update contract", command=update_contract, font=("Cooper Black", 11))
+        new_client_btn = Button(user_window, text="Create new client", command=client_reg,
+                                  font=("Cooper Black", 12))
+
+        new_contract_btn = Button(user_window, text="New contract", command=create_contract,
+                                  font=("Cooper Black", 11))
+
+        view_contract_btn = Button(user_window, text="List of contracts", command=view_contract,
+                                  font=("Cooper Black", 11))
+
+        view_address_btn = Button(user_window, text="List of delivery addresses", command=view_address,
+                                  font=("Cooper Black", 11))
+
+        view_firms_btn = Button(user_window, text="List of client's firms", command=view_firms,
+                                  font=("Cooper Black", 11))
+
+        clear_all_btn = Button(user_window, text="Clear all files", command=clear_all_files,
+                                  font=("Cooper Black", 11))
+
+        update_contract_btn = Button(user_window, text="Update contract", command=update_contract,
+                                  font=("Cooper Black", 11))
 
         new_client_btn.pack()
         new_contract_btn.pack()
@@ -168,9 +196,8 @@ def user_init(user_type):
         view_contract_btn.place(x=10, y=240)
         view_address_btn.place(x=10, y=310)
         view_firms_btn.place(x=10, y=380)
-        clear_all_btn.place(x=200, y=600)
+        clear_all_btn.place(x=300, y=600)
         update_contract_btn.place(x=150, y=170)
-
 
         if not client_created:
             new_contract_btn.config(state=tk.DISABLED)
@@ -188,26 +215,54 @@ def user_init(user_type):
         client_label.place(x=200, y=20)
 
     elif user_type == "Dispatcher":
-        new_dispatcher_btn = Button(user_window, text="Create new dispatcher", command=dispatcher_reg, font=("Cooper Black", 12))
-        new_contract_btn = Button(user_window, text="New contract", command=create_contract, font=("Cooper Black", 11))
-        view_contract_btn = Button(user_window, text="List of contracts", command=view_contract, font=("Cooper Black", 11))
-        view_address_btn = Button(user_window, text="List of addresses", command=view_address, font=("Cooper Black", 11))
-        view_firms_btn = Button(user_window, text="List of client's firms", command=view_firms, font=("Cooper Black", 11))
-        clear_all_btn = Button(user_window, text="Clear all files", command=clear_all_files, font=("Cooper Black", 11))
-        update_contract_btn = Button(user_window, text="Update contract", command=update_contract, font=("Cooper Black", 11))
+        new_dispatcher_btn = Button(user_window, text="Create new dispatcher", command=dispatcher_reg,
+                                    font=("Cooper Black", 12))
 
-        max_btn = Button(user_window, text="Max delivery time",command=max_delivery_time, font=("Cooper Black", 11))
-        view_max_btn = Button(user_window, text="View", command=max_time,font=("Cooper Black", 11))
-        arr_btn = Button(user_window, text="The most popular station",command=most_popular_destination, font=("Cooper Black", 11))
-        view_arr_btn = Button(user_window, text="View", command=arrival_st,font=("Cooper Black", 11))
-        avg_btn = Button(user_window, text="Average delivery time", command=calculate_avg_time, font=("Cooper Black", 11))
-        view_avg_btn = Button(user_window, text="View", command=avg_time ,font=("Cooper Black", 11))
+        new_contract_btn = Button(user_window, text="New contract", command=create_contract,
+                                    font=("Cooper Black", 11))
+
+        view_contract_btn = Button(user_window, text="List of contracts", command=view_contract,
+                                    font=("Cooper Black", 11))
+
+        view_address_btn = Button(user_window, text="List of addresses", command=view_address,
+                                    font=("Cooper Black", 11))
+
+        view_firms_btn = Button(user_window, text="List of client's firms", command=view_firms,
+                                    font=("Cooper Black", 11))
+
+        view_dis_btn = Button(user_window, text="List of dispatchers", command=view_dispatcher,
+                                font=("Cooper Black", 11))
+
+        clear_all_btn = Button(user_window, text="Clear all files", command=clear_all_files,
+                                    font=("Cooper Black", 11))
+
+        update_contract_btn = Button(user_window, text="Update contract", command=update_contract,
+                                    font=("Cooper Black", 11))
+
+        max_btn = Button(user_window, text="Max delivery time", command=max_delivery_time,
+                                    font=("Cooper Black", 11))
+
+        view_max_btn = Button(user_window, text="View", command=max_time,
+                                    font=("Cooper Black", 11))
+
+        arr_btn = Button(user_window, text="The most popular station", command=most_popular_destination,
+                                    font=("Cooper Black", 11))
+
+        view_arr_btn = Button(user_window, text="View", command=arrival_st,
+                                    font=("Cooper Black", 11))
+
+        avg_btn = Button(user_window, text="Average delivery time", command=calculate_avg_time,
+                                    font=("Cooper Black", 11))
+
+        view_avg_btn = Button(user_window, text="View", command=avg_time,
+                                    font=("Cooper Black", 11))
 
         new_dispatcher_btn.pack()
         new_contract_btn.pack()
         view_contract_btn.pack()
         view_address_btn.pack()
         view_firms_btn.pack()
+        view_dis_btn.pack()
 
         max_btn.pack()
         view_max_btn.pack()
@@ -220,17 +275,21 @@ def user_init(user_type):
 
         new_dispatcher_btn.place(x=50, y=100)
         new_contract_btn.place(x=10, y=160)
-        view_contract_btn.place(x=10, y=215)
-        view_address_btn.place(x=10, y=255)
-        view_firms_btn.place(x=10, y=295)
-        max_btn.place(x=5, y=335)
-        view_max_btn.place(x=230, y=335)
-        arr_btn.place(x=1, y=375)
-        view_arr_btn.place(x=230, y=375)
-        avg_btn.place(x=5, y=415)
-        view_avg_btn.place(x=230, y=415)
-        clear_all_btn.place(x=300, y=615)
         update_contract_btn.place(x=150, y=160)
+
+        view_contract_btn.place(x=10, y=215)
+        view_address_btn.place(x=10, y=250)
+        view_firms_btn.place(x=10, y=285)
+        view_dis_btn.place(x=10, y=320)
+
+        max_btn.place(x=5, y=420)
+        view_max_btn.place(x=230, y=420)
+        arr_btn.place(x=1, y=460)
+        view_arr_btn.place(x=230, y=460)
+        avg_btn.place(x=5, y=500)
+        view_avg_btn.place(x=230, y=500)
+        clear_all_btn.place(x=300, y=615)
+
 
         if not dispatcher_created:
             new_contract_btn.config(state=tk.DISABLED)
