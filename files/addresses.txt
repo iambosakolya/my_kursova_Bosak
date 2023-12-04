@@ -6,3 +6,18 @@ Arrival station: Kyiv East
 
 Contract ID: 3
 Arrival station: Kyiv East
+
+Contract ID: 4
+Arrival station: Kyiv West
+
+Contract ID: 5
+Arrival station: Dnipro North
+
+Contract ID: 6
+Arrival station: Kharkiv Central
+
+Contract ID: 7
+Arrival station: Zaporizhzhia Port
+
+Contract ID: 8
+Arrival station: Chernivtsi North
