@@ -1,14 +1,8 @@
 Firm name: Rail Cargo Solutions
-Address: Mikhakivska 89
-Phone number(+38): 0661004758
-PIB: Bosak O.S.
-Work experience: 15.0 years
-
-Firm name: Rail Cargo Solutions
-Address: Prosvitu 8
-Phone number(+38): 0957458852
-PIB: Shevchenko D.D.
-Work experience: 7.0 years
+Address: vul. Mala Arnautska, Odesa
+Phone number(+38): 0954154478
+PIB: Bosak D.S.
+Work experience: 5.0 years
 
 Firm name: Rail Cargo Solutions
 Address: Pankeevska 78
@@ -21,11 +15,4 @@ Address: Dalnitska 1
 Phone number(+38): 0508261705
 PIB: Kolot E.V.
 Work experience: 27.0 years
-
-Firm name: Rail Cargo Solutions
-Address: Prosvitu 8
-Phone number(+38): 0664117062
-PIB: Shevchenko D.I.
-Work experience: 7.0 years
-
 

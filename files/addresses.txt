@@ -1,19 +1,8 @@
 Contract ID: 1
-Arrival station: Ropvo 45
+Arrival station: Kyiv East
 
 Contract ID: 2
-Arrival station: Lviv West
+Arrival station: Kyiv East
 
 Contract ID: 3
-Arrival station: Kharkiv East
-
-Contract ID: 4
-Arrival station: Zaporizhia
-
-Contract ID: 5
-Arrival station: Odesa South
-
-Contract ID: 6
-Arrival station: Zaporizhia
-
-
+Arrival station: Kyiv East

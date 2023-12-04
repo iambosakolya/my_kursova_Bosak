@@ -51,7 +51,3 @@ class Contract:
 
     def get_contract_id(self):
         return self.contract_id
-
-
-
-

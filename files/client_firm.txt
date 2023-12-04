@@ -1,15 +1,15 @@
+Firm name: Rello
+Address: vul. Kontraktova 89, Kyiv
+Phone number(+38): 0664115285
+PIB: Bosak O.S
+
 Firm name: Hugo
-Address: Odesa, Mykhalivska 99
-Phone number(+38): 0664115230
+Address: vul. Mykhalivska 89, Odesa
+Phone number(+38): 0954154450
 PIB: Petho G.D.
 
 Firm name: Gray
-Address: New York, Wall 87
-Phone number(+38): 4807445265
+Address: vul. Suhivska 3, Lviv
+Phone number(+38): 0508264175
 PIB: Werwek D.G.
-
-Firm name: Samerlo
-Address: Lviv, Suhivska 56
-Phone number(+38): 0674115285
-PIB: Tarasen K.S.
 

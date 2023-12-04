@@ -1,6 +1,6 @@
 Contract ID: 1
 Departure station: Veluka 6
-Arrival station: Ropvo 45
+Arrival station: Kyiv East
 Insurance sum: 9000.00 UAH
 Cargo type: grain
 Delivery time(in days): 40
@@ -9,51 +9,21 @@ Date of conclusion: 2023-12-12
 Cost: 4500.00 UAH
 
 Contract ID: 2
-Departure station: Kyiv Central
-Arrival station: Lviv West
-Insurance sum: 12000.00 UAH
-Cargo type: electronics
-Delivery time (in days): 25
-Weight: 800.00 KG
-Date of conclusion: 2023-11-20
-Cost: 6000.00 UAH
+Departure station: Odesa South
+Arrival station: Kyiv East
+Insurance sum: 80,000.00 UAH
+Cargo type: chemicals
+Delivery time(in days): 15
+Weight: 90,000.00 KG
+Date of conclusion: 2023-10-12
+Cost: 35,000.00 UAH
 
 Contract ID: 3
 Departure station: Odessa Port
-Arrival station: Kharkiv East
+Arrival station: Kyiv East
 Insurance sum: 15000.00 UAH
 Cargo type: chemicals
 Delivery time (in days): 35
 Weight: 120.00 KG
 Date of conclusion: 2023-10-15
 Cost: 7500.00 UAH
-
-Contract ID: 4
-Departure station: Dnipro South
-Arrival station: Zaporizhia
-Insurance sum: 8000.00 UAH
-Cargo type: machinery
-Delivery time (in days): 28
-Weight: 100.00 KG
-Date of conclusion: 2023-09-05
-Cost: 4000.00 UAH
-
-Contract ID: 5
-Departure station: Chernivtsi South
-Arrival station: Odesa South
-Insurance sum: 8,500.00 UAH
-Cargo type: textiles
-Delivery time(in days): 45
-Weight: 5,800.00 KG
-Date of conclusion: 2023-10-10
-Cost: 500.00 UAH
-
-Contract ID: 6
-Departure station: Chernivtsi
-Arrival station: Zaporizhia
-Insurance sum: 560.00 UAH
-Cargo type: textiles
-Delivery time(in days): 56
-Weight: 560.00 KG
-Date of conclusion: 2023-10-06
-Cost: 45,200.00 UAH
